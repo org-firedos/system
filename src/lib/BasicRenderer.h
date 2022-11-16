@@ -16,6 +16,7 @@ struct CHAR {
     uint8_t color;
 };
 
+
 enum {
 	COLOR_GREEN = 2,
 	COLOR_CYAN = 3,
@@ -61,3 +62,7 @@ class BasicRenderer
         }*/
         //void PrintEx(const char* str, int xpos, int ypos);
 };
+
+
+extern BasicRenderer __r__;
+extern BasicRenderer* GlobalRenderer;

@@ -15,12 +15,12 @@ x86_64_object_files := $(lib_c_object_files) $(lib_asm_object_files) $(boot_obje
 
 $(kernel_object_files): build/system/%.o : src/system/%.cpp
 	mkdir -p $(dir $@) && \
-	g++ -c -I src/lib -ffreestanding $(patsubst build/system/%.o, src/system/%.cpp, $@) -o $@
+	g++ -c -I src/system -Wattributes -ffreestanding $(patsubst build/system/%.o, src/system/%.cpp, $@) -o $@
 
 
 $(lib_c_object_files): build/lib/%.o : src/lib/%.cpp
 	mkdir -p $(dir $@) && \
-	g++ -c -I src/lib -ffreestanding $(patsubst build/lib/%.o, src/lib/%.cpp, $@) -o $@
+	g++ -c -I src/lib -Wattributes -ffreestanding $(patsubst build/lib/%.o, src/lib/%.cpp, $@) -o $@
 
 $(lib_asm_object_files): build/lib/%.o : src/lib/%.asm
 	mkdir -p $(dir $@) && \

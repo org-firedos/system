@@ -4,6 +4,10 @@ const static size_t NUM_COLS = 80;
 const static size_t NUM_ROWS = 25;
 
 
+BasicRenderer __r__ = BasicRenderer();
+BasicRenderer* GlobalRenderer = &__r__;
+
+
 COLOR::COLOR(uint8_t _foreground, uint8_t _background){
     this->foreground = _foreground;
     this->background = _background;
@@ -11,16 +15,16 @@ COLOR::COLOR(uint8_t _foreground, uint8_t _background){
 
 void BasicRenderer::PutChar(char c){
     if (c == '\n') {
-        Next();
+        this->Next();
         return;
     }
 
     if (this->Col > NUM_COLS) {
-        Next();
+        this->Next();
     }
     
 
-    (*this).Buffer[this->Col + NUM_COLS + this->Row] = (CHAR){
+    this->Buffer[this->Col + NUM_COLS + this->Row] = (CHAR){
         character: (uint8_t) c,
         color: this->Color,
     };
@@ -42,6 +46,8 @@ void BasicRenderer::Next(){
             this->Buffer[col + NUM_COLS * (row - 1)] = character;
         }
     }
+
+    this->ClearRow(NUM_ROWS - 1);
 }
 
 void BasicRenderer::SetColor(COLOR _color){
