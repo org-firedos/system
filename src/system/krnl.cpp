@@ -21,7 +21,7 @@ extern "C" int kernel_main(){
 
     IDTSetDescriptor(0xE, (void*)&PageFault_Handler, IDT_TA_InterruptGate);
     
-    IDTSetDescriptor(0x21, (void*)&KeyboardInt_Handler, IDT_TA_InterruptGate);
+    IDTSetDescriptor(0x21, (void*)&KeyboardInt_Handler, IDT_TA_TrapGate);
 
     
 
@@ -38,7 +38,7 @@ extern "C" int kernel_main(){
 
     GlobalRenderer->Print("Welcome to FIREDOS x64!");
     
-    //if(are_interrupts_enabled())pRenderer->Print("\nInterupts!\n");
+    if(are_interrupts_enabled())GlobalRenderer->Print("\nInterupts!\n");
 
 
 
@@ -46,6 +46,8 @@ extern "C" int kernel_main(){
     {
         /* code */
     }
+
+    GlobalRenderer->Print("HELLO!! EXIT!!!");
     
 }
 

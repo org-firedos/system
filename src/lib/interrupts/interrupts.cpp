@@ -47,31 +47,25 @@ void RemapPIC(){
 
 __attribute__((interrupt))void PageFault_Handler(struct interrupt_frame* frame)
 {
-
-    GlobalRenderer->Print("Hello World");
-
-    while (true)
-    {
-        asm ("hlt");
-    }
+    GlobalRenderer->SetColor(COLOR(COLOR_WHITE, COLOR_RED));
+    GlobalRenderer->ClearEx(COLOR_RED);
+    GlobalRenderer->Print("Page Fault Detected!");
     
+    asm ("hlt");
 
     PIC_EndMaster();
 };
 
 __attribute__((interrupt))void DefaultInt_Handler(struct interrupt_frame* frame)
 {
-    PIC_EndSlave();
+    PIC_EndMaster();
 };
-
-char* InputBuffer;
 
 __attribute__((interrupt))void KeyboardInt_Handler(struct interrupt_frame* frame)
 {
     
     // Make somthing whene key is pressed!
-    GlobalRenderer->Print("Pressed!");
-    GlobalRenderer->PutChar(InByte(0x60));
+    HandleKeyboard(inb(0x60));
 
     PIC_EndMaster();
 };

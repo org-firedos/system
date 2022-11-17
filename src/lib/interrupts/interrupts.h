@@ -1,6 +1,7 @@
 #pragma once
 #include "../BasicRenderer.h"
 #include "../IO.h"
+#include "../userinput/keyboard.h"
 
 #define PIC1_COMMAND 0x20
 #define PIC1_DATA 0x21
