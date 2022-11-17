@@ -3,9 +3,7 @@
 const static size_t NUM_COLS = 80;
 const static size_t NUM_ROWS = 25;
 
-
-BasicRenderer __r__ = BasicRenderer();
-BasicRenderer* GlobalRenderer = &__r__;
+BasicRenderer* GlobalRenderer;
 
 
 COLOR::COLOR(uint8_t _foreground, uint8_t _background){
@@ -24,7 +22,7 @@ void BasicRenderer::PutChar(char c){
     }
     
 
-    this->Buffer[this->Col + NUM_COLS + this->Row] = (CHAR){
+    this->Buffer[this->Col + NUM_COLS * this->Row] = (CHAR){
         character: (uint8_t) c,
         color: this->Color,
     };

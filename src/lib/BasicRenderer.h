@@ -64,5 +64,4 @@ class BasicRenderer
 };
 
 
-extern BasicRenderer __r__;
 extern BasicRenderer* GlobalRenderer;

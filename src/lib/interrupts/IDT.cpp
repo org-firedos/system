@@ -21,10 +21,10 @@ void IDTInit(){
     idtr.base = (uintptr_t)&idt[0];
     idtr.limit = (uint16_t)sizeof(IDTEntry) * 256 - 1;
  
-    for (uint8_t vector = 0; vector < 32; vector++) {
+    /*for (uint8_t vector = 0; vector < 32; vector++) {
         IDTSetDescriptor(vector, (void*)DefaultInt_Handler , 0x8E);
         vectors[vector] = true;
-    }
+    }*/
  
     __asm__ volatile ("lidt %0" : : "m"(idtr)); // load the new IDT
 

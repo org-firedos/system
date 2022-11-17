@@ -1,7 +1,7 @@
 #include "interrupts.h"
 
-#pragma region PIC
-    void PIC_EndMaster(){
+
+void PIC_EndMaster(){
     outb(PIC1_COMMAND, PIC_EOI);
 }
 
@@ -44,7 +44,6 @@ void RemapPIC(){
     outb(PIC2_DATA, a2);
 
 }
-#pragma endregion
 
 __attribute__((interrupt))void PageFault_Handler(struct interrupt_frame* frame)
 {
@@ -71,6 +70,8 @@ __attribute__((interrupt))void KeyboardInt_Handler(struct interrupt_frame* frame
 {
     
     // Make somthing whene key is pressed!
+    GlobalRenderer->Print("Pressed!");
+    GlobalRenderer->PutChar(InByte(0x60));
 
     PIC_EndMaster();
 };
